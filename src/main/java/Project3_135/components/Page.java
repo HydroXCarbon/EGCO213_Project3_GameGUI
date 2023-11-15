@@ -5,18 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Page extends JPanel{
-    private final JPanel cardPanel;
-    private final CardLayout cardLayout;
-
+public class Page extends BasePage{
     public Page(JPanel cardPanel, CardLayout cardLayout, Color color){
-        this.cardPanel = cardPanel;
-        this.cardLayout = cardLayout;
+        super(cardPanel, cardLayout);
 
         initializeComponents(color);
     }
 
-    private void initializeComponents(Color color) {
+    @Override
+    protected void initializeComponents(Color color) {
         setLayout(new BorderLayout());
         setBackground(color);
 
@@ -25,7 +22,7 @@ public class Page extends JPanel{
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String pageName = "main";
+                String pageName = "mainPage";
                 cardLayout.show(cardPanel, pageName);
             }
         });

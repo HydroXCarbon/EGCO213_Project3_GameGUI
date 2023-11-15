@@ -28,4 +28,6 @@ public abstract class BasePage extends JPanel {
         button.setContentAreaFilled(false);
         button.setBorder(new EmptyBorder(50, 0, 0, 0));
     }
+
+
 }

@@ -23,6 +23,15 @@ public class MyMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         cardLayout.show(cardPanel, path);
+
+        // Find the index of the component and set focus
+        Component[] components = cardPanel.getComponents();
+        for (int i = 0; i < components.length; i++) {
+            if (components[i].getName() != null && components[i].getName().equals(path)) {
+                components[i].requestFocusInWindow();
+                break;
+            }
+        }
     }
 
     @Override

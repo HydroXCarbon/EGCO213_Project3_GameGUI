@@ -41,9 +41,9 @@ public class MainPage extends BasePage {
         JButton creditButton = createButton(creditIcon);
 
         // Add components listener to the buttons
-        playButton.addMouseListener(new MyMouseListener("game", playIcon, playIconHover, cardPanel, cardLayout));
-        settingButton.addMouseListener(new MyMouseListener("setting", settingIcon, settingIconHover, cardPanel, cardLayout));
-        creditButton.addMouseListener(new MyMouseListener("credit", creditIcon, creditIconHover, cardPanel, cardLayout));
+        playButton.addMouseListener(new MyMouseListener("gamePage", playIcon, playIconHover, cardPanel, cardLayout));
+        settingButton.addMouseListener(new MyMouseListener("settingPage", settingIcon, settingIconHover, cardPanel, cardLayout));
+        creditButton.addMouseListener(new MyMouseListener("creditPage", creditIcon, creditIconHover, cardPanel, cardLayout));
         textField.getDocument().addDocumentListener(new MyDocumentListener());
 
         // Add components to the panel
