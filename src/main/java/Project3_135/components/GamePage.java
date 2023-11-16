@@ -9,16 +9,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GamePage extends BasePage {
 
-    private final int itemAmount = 10;
+    private final int itemAmount = Utilities.ITEMAMOUNT;
     private final int[] line = new int[4];
     private int totalScore = 0;
     private int itemCount = 0;
     private HookLabel hookLabel;
     private Image backgroundImage;
+    private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
 
 
     public GamePage(JPanel cardPanel, CardLayout cardLayout) {
@@ -98,35 +100,65 @@ public class GamePage extends BasePage {
     private void setItemLabel(GamePage gamePage) {
         Thread itemThread = new Thread() {
             public void run() {
-                ItemLabel item = new ItemLabel();
+                boolean firstHit = false;
+                final ItemLabel[] item = {null};
+                // Create a new item
+                createNewItem(item);
+                add(item[0]);
+                //SwingUtilities.invokeLater(() -> gamePage.add(item[0]));
 
-                add(item);
                 while (true) {
-                    // Kill thread and Collect item
-                    if (hookLabel.getOriginalBound().intersects(item.getBounds())) {
-                        updateScore(item.getScore());
+
+                    // Kill thread and collect item
+                    if (hookLabel.getOriginalBound().intersects(item[0].getBounds())) {
+                        updateScore(item[0].getScore());
                         itemCount++;
                         break;
                     }
 
                     // Pull item
-                    if (item.getBounds().intersects(hookLabel.getBounds())) {
+                    if (item[0].getBounds().intersects(hookLabel.getBounds())) {
+                        if (!firstHit) {
+                            item[0].playHitSound();
+                            firstHit = true;
+                        }
                         hookLabel.isCatch();
-                        hookLabel.setSpeed(item.getSpeedPenalty());
-                        item.followHook(hookLabel.getBounds().x, hookLabel.getBounds().y);
+                        hookLabel.setSpeed(item[0].getSpeedPenalty());
+                        item[0].followHook(hookLabel.getBounds().x, hookLabel.getBounds().y);
                         continue;
                     }
-                    item.updateLocation();
+                    item[0].updateLocation();
                 }
+
                 hookLabel.setSpeed(100);
                 SwingUtilities.invokeLater(() -> {
-                    gamePage.remove(item);
+                    gamePage.remove(item[0]);
                     gamePage.repaint();
                 });
             }
         };
         itemThread.start();
     }
+
+    private void createNewItem(ItemLabel[] item) {
+        do {
+            item[0] = new ItemLabel();
+        } while (isOverlapping(item[0]));
+
+        itemList.add(item[0]);
+    }
+
+    private boolean isOverlapping(ItemLabel newItem) {
+        synchronized (itemList) {
+            for (ItemLabel existingItem : itemList) {
+                if (existingItem.getBounds().intersects(newItem.getBounds())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 
     synchronized private void updateScore(int score) {
         totalScore += score;
@@ -152,5 +184,6 @@ public class GamePage extends BasePage {
         // Restore the original stroke
         g2d.setStroke(oldStroke);
     }
+
 }
 

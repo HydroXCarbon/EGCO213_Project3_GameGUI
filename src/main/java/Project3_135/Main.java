@@ -35,7 +35,7 @@ class MainApplication extends JFrame {
         // Run theme sound
         themeSound = new MySoundEffect(Utilities.THEME_SOUND_PATH);
         themeSound.playLoop();
-        themeSound.setVolume(0.4f);
+        themeSound.setVolume(0.5f);
 
         // Create different pages (JPanel) for your application
         JPanel settingPage = new SettingPage(cardPanel, cardLayout, themeSound);

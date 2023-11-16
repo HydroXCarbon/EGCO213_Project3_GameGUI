@@ -8,14 +8,33 @@ public interface Utilities {
     static final String PLAY_HOVER_PATH  = PATH + "play_hover.png";
     static final String HOOK_IMAGE_PATH  = PATH + "hook.png";
     static final String DIAMOND_IMAGE_PATH  = PATH + "diamond.png";
+    static final String GOLDORE_SMALL_IMAGE_PATH  = PATH + "goldore_small.png";
+    static final String GOLDORE_LARGE_IMAGE_PATH  = PATH + "goldore_large.png";
     static final String ROCK_SMALL_IMAGE_PATH  = PATH + "rock_small.png";
     static final String ROCK_LARGE_IMAGE_PATH  = PATH + "rock_large.png";
     static final String BACKGROUND_IMAGE_PATH  = PATH + "background.png";
     static final String THEME_SOUND_PATH  = PATH + "maintheme.wav";
+    static final String ROCKHIT_SOUND_PATH  = PATH + "rockhit.wav";
 
     // Frame setting
     int FRAMEWIDTH = 1366;
     int FRAMEHEIGHT = 768;
 
-    // Item setting
+    // Item setting (Minimum range, Maximum range, Score, Speed penalty
+    String[] IMAGEFILES ={
+            ROCK_SMALL_IMAGE_PATH,
+            ROCK_LARGE_IMAGE_PATH,
+            GOLDORE_SMALL_IMAGE_PATH,
+            GOLDORE_LARGE_IMAGE_PATH,
+            DIAMOND_IMAGE_PATH};
+    double[] SPAWNCHANCE  = {30, 20, 20, 20, 5};
+    int[] SPAWNCONDITION1 = {200, 600, 10, 15};
+    int[] SPAWNCONDITION2 = {250, 650, 20, 10};
+    int[] SPAWNCONDITION3 = {300, 600, 40, 30};
+    int[] SPAWNCONDITION4 = {300, 650, 100, 12};
+    int[] SPAWNCONDITION5 = {600, 650, 300, 15};
+
+    // Game setting
+    int ITEMAMOUNT = 30;
+
 }

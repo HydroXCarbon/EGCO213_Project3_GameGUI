@@ -1,12 +1,9 @@
 package Project3_135.components;
 
-import Project3_135.Utilities;
 import Project3_135.model.MySoundEffect;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.sound.sampled.*;
-import java.io.File;
 
 public class SettingPage extends BasePage {
     private JSlider slider;

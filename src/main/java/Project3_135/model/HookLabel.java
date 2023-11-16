@@ -105,6 +105,7 @@ public class HookLabel extends JLabel {
             if (moveDown) {
                 radius += speed;
             } else {
+
                 if (radius < originalRadius) {
                     radius = originalRadius;
                     move = false;
