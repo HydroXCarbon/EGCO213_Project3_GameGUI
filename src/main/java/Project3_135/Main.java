@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-class Main extends JFrame {
+class MainApplication extends JFrame {
     // components
     private JPanel cardPanel;
     private CardLayout cardLayout;
@@ -16,10 +16,10 @@ class Main extends JFrame {
     private final int frameheight = Utilities.FRAMEHEIGHT;
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Main().MainApplication());
+        SwingUtilities.invokeLater(() -> new MainApplication().Main());
     }
 
-    public void MainApplication() {
+    public void Main() {
         // Set up the frame
         setTitle("Mining Gold");
         setSize(framewidth, frameheight);
@@ -31,11 +31,6 @@ class Main extends JFrame {
         cardPanel = new JPanel(cardLayout);
 
         // Create different pages (JPanel) for your application
-        JPanel mainPage = new MainPage(cardPanel, cardLayout, Color.RED);
-        mainPage.setName("mainPage");
-
-        JPanel gamePage = new GamePage(cardPanel, cardLayout, Color.GREEN);
-        gamePage.setName("gamePage");
 
         JPanel settingPage = new Page(cardPanel, cardLayout, Color.BLUE);
         settingPage.setName("settingPage");
@@ -43,9 +38,11 @@ class Main extends JFrame {
         JPanel creditPage = new Page(cardPanel, cardLayout, Color.BLUE);
         creditPage.setName("creditPage");
 
+        JPanel mainPage = new MainPage(cardPanel, cardLayout, Color.RED);
+        mainPage.setName("mainPage");
+
         // Add pages to cardPanel
         cardPanel.add(mainPage, "mainPage");
-        cardPanel.add(gamePage, "gamePage");
         cardPanel.add(settingPage, "settingPage");
         cardPanel.add(creditPage, "creditPage");
 

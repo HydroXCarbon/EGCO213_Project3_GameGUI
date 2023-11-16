@@ -10,11 +10,14 @@ import java.awt.image.BufferedImage;
 
 public class HookLabel extends JLabel {
 
+    private GamePage gamePage;
     private final Icon hookIcon;
     private Rectangle originalBound;
+    private int[] line;
     private int curY = 0;
     private int curX = 0;
-    private int speed = 1;
+    private int originalSpeed = 1;
+    private int speed;
     private final int originalRadius = 100;
     private int radius;
     private double angle = Math.toRadians(270);
@@ -23,13 +26,16 @@ public class HookLabel extends JLabel {
     private boolean move = false;
     private boolean moveDown = true;
 
-    public HookLabel() {
+    public HookLabel(GamePage gamePage,int[] line) {
         // Load the image icons
         ImageIcon hookIcon = new MyImageIcon(Utilities.HOOK_IMAGE_PATH).resize(20);
         setIcon(hookIcon);
 
+        this.gamePage = gamePage;
         this.hookIcon = hookIcon;
+        this.line = line;
         this.radius = this.originalRadius;
+        this.speed = this.originalSpeed;
     }
 
     public void setInitial(int x, int y){
@@ -38,7 +44,15 @@ public class HookLabel extends JLabel {
         int newX = curX + (int) (radius * Math.cos(angle));
         int newY = curY - (int) (radius * Math.sin(angle));
         setBounds(curX, curY, hookIcon.getIconWidth(), hookIcon.getIconHeight());
-        originalBound = new Rectangle(newX - hookIcon.getIconWidth()*2, newY, hookIcon.getIconWidth()*4, hookIcon.getIconHeight());
+        originalBound = new Rectangle(
+                newX - hookIcon.getIconWidth()*2,
+                newY - hookIcon.getIconHeight() *3/2,
+                hookIcon.getIconWidth()*5,
+                hookIcon.getIconHeight()*5/2);
+//        line[0] = newX - hookIcon.getIconWidth()*2;
+//        line[1] = newY - hookIcon.getIconHeight() *3/2;
+//        line[2] = newX - hookIcon.getIconWidth()*2     + hookIcon.getIconWidth()*5;
+//        line[3] = newY - hookIcon.getIconHeight() *3/2 + hookIcon.getIconHeight()*5/2;
     }
     public Rectangle getOriginalBound(){
         return this.originalBound;
@@ -64,6 +78,11 @@ public class HookLabel extends JLabel {
 
         int newX = curX + (int) (radius * Math.cos(angle));
         int newY = curY - (int) (radius * Math.sin(angle));
+
+        line[0] = curX + hookIcon.getIconWidth() / 2;
+        line[1] = curY + hookIcon.getIconHeight() / 2;
+        line[2] = newX + hookIcon.getIconWidth() / 2;
+        line[3] = newY + hookIcon.getIconHeight() / 2;
 
         // Update the angle direction based on the desired pattern
         if (angle + angularSpeed >= Math.toRadians(350) && rotateRight) {
@@ -107,7 +126,6 @@ public class HookLabel extends JLabel {
         // Set new position
         setLocation(newX, newY);
         setBounds(newX, newY, hookIcon.getIconWidth(), hookIcon.getIconHeight());
-        repaint();
 
         // Set FPS
         try {

@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public abstract class BasePage extends JPanel {
+public abstract class BasePage extends JPanel{
 
     protected final JPanel cardPanel;
     protected final CardLayout cardLayout;
@@ -28,6 +28,5 @@ public abstract class BasePage extends JPanel {
         button.setContentAreaFilled(false);
         button.setBorder(new EmptyBorder(50, 0, 0, 0));
     }
-
-
 }
+
