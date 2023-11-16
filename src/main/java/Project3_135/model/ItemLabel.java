@@ -9,6 +9,7 @@ import java.awt.*;
 public class ItemLabel extends JLabel {
     private final int type;
     private int score;
+    private int speedPenalty;
     private final MyImageIcon itemImg;
     String[] imageFiles = {Utilities.DIAMOND_IMAGE_PATH, Utilities.ROCK_SMALL_IMAGE_PATH, Utilities.ROCK_LARGE_IMAGE_PATH};
     private int curX;
@@ -22,12 +23,15 @@ public class ItemLabel extends JLabel {
         switch(type){
             case 0:
                 score = 100;
+                speedPenalty = 40;
                 break;
             case 1:
                 score = 30;
+                speedPenalty = 15;
                 break;
             case 2:
                 score = 10;
+                speedPenalty = 20;
                 break;
         }
         curY = 500;
@@ -55,6 +59,10 @@ public class ItemLabel extends JLabel {
 
     public int getScore(){
         return score;
+    }
+
+    public int getSpeedPenalty(){
+        return speedPenalty;
     }
 
     public void followHook(int x, int y){

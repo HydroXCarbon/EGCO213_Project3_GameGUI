@@ -1,6 +1,7 @@
 package Project3_135;
 
-import Project3_135.components.GamePage;
+import Project3_135.components.SettingPage;
+import Project3_135.model.MySoundEffect;
 import Project3_135.components.MainPage;
 import Project3_135.components.Page;
 
@@ -12,6 +13,7 @@ class MainApplication extends JFrame {
     // components
     private JPanel cardPanel;
     private CardLayout cardLayout;
+    private MySoundEffect themeSound;
     private final int framewidth = Utilities.FRAMEWIDTH;
     private final int frameheight = Utilities.FRAMEHEIGHT;
 
@@ -30,15 +32,19 @@ class MainApplication extends JFrame {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
-        // Create different pages (JPanel) for your application
+        // Run theme sound
+        themeSound = new MySoundEffect(Utilities.THEME_SOUND_PATH);
+        themeSound.playLoop();
+        themeSound.setVolume(0.4f);
 
-        JPanel settingPage = new Page(cardPanel, cardLayout, Color.BLUE);
+        // Create different pages (JPanel) for your application
+        JPanel settingPage = new SettingPage(cardPanel, cardLayout, themeSound);
         settingPage.setName("settingPage");
 
-        JPanel creditPage = new Page(cardPanel, cardLayout, Color.BLUE);
+        JPanel creditPage = new Page(cardPanel, cardLayout);
         creditPage.setName("creditPage");
 
-        JPanel mainPage = new MainPage(cardPanel, cardLayout, Color.RED);
+        JPanel mainPage = new MainPage(cardPanel, cardLayout);
         mainPage.setName("mainPage");
 
         // Add pages to cardPanel

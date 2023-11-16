@@ -10,8 +10,12 @@ public interface Utilities {
     static final String DIAMOND_IMAGE_PATH  = PATH + "diamond.png";
     static final String ROCK_SMALL_IMAGE_PATH  = PATH + "rock_small.png";
     static final String ROCK_LARGE_IMAGE_PATH  = PATH + "rock_large.png";
+    static final String BACKGROUND_IMAGE_PATH  = PATH + "background.png";
+    static final String THEME_SOUND_PATH  = PATH + "maintheme.wav";
 
     // Frame setting
     int FRAMEWIDTH = 1366;
     int FRAMEHEIGHT = 768;
+
+    // Item setting
 }

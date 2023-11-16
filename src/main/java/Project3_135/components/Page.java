@@ -6,16 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Page extends BasePage{
-    public Page(JPanel cardPanel, CardLayout cardLayout, Color color){
+    public Page(JPanel cardPanel, CardLayout cardLayout){
         super(cardPanel, cardLayout);
 
-        initializeComponents(color);
+        initializeComponents();
     }
 
-    @Override
-    protected void initializeComponents(Color color) {
+    protected void initializeComponents() {
         setLayout(new BorderLayout());
-        setBackground(color);
 
         // Create Back button
         JButton backButton = new JButton("Back");

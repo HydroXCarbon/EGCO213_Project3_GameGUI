@@ -10,15 +10,13 @@ import java.awt.*;
 
 public class MainPage extends BasePage {
 
-    public MainPage(JPanel cardPanel, CardLayout cardLayout, Color color) {
+    public MainPage(JPanel cardPanel, CardLayout cardLayout) {
         super(cardPanel, cardLayout);
-        initializeComponents(color);
+        initializeComponents();
     }
 
-    @Override
-    protected void initializeComponents(Color color) {
+    protected void initializeComponents() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 10000, 0));
-        setBackground(color);
 
         // Create a text field
         JTextField textField = new JTextField(15);
@@ -46,7 +44,7 @@ public class MainPage extends BasePage {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 super.mouseClicked(e);
                 // Create a new instance of GamePage and add it to the cardPanel
-                GamePage newGamePage = new GamePage(cardPanel, cardLayout, Color.GREEN);
+                GamePage newGamePage = new GamePage(cardPanel, cardLayout);
                 newGamePage.setName("gamePage");
                 cardPanel.add(newGamePage, "gamePage");
                 cardLayout.show(cardPanel, "gamePage");

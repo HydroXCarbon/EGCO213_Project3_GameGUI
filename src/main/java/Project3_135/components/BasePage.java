@@ -14,8 +14,6 @@ public abstract class BasePage extends JPanel{
         this.cardLayout = cardLayout;
     }
 
-    protected abstract void initializeComponents(Color color);
-
     protected JButton createButton(ImageIcon icon) {
         JButton button = new JButton(icon);
         setButtonStyle(button);
