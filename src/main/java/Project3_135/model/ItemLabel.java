@@ -58,6 +58,7 @@ public class ItemLabel extends JLabel {
         curY = (int) (Math.random() * (value[1] - value[0]) + value[0]);
 
         hitSound = new MySoundEffect(Utilities.ROCKHIT_SOUND_PATH);
+        hitSound.setVolume(0.5f);
         itemImg = new MyImageIcon(imageFiles[type]).resize(9);
         width = itemImg.getIconWidth();
         height = itemImg.getIconHeight();

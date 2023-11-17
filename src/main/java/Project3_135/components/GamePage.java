@@ -4,6 +4,7 @@ import Project3_135.Utilities;
 import Project3_135.model.HookLabel;
 import Project3_135.model.ItemLabel;
 import Project3_135.model.MyImageIcon;
+import Project3_135.model.PauseMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +15,16 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CountDownLatch;
+
 
 public class GamePage extends BasePage {
 
     private final int itemAmount = Utilities.ITEMAMOUNT;
     private final int[] line = new int[4];
     private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
+    private final CountDownLatch itemLatch = new CountDownLatch(itemAmount);
+    private PauseMenu pauseMenu;
     private int timer;
     private int totalScore = 0;
     private int itemCount = 0;
@@ -34,21 +39,25 @@ public class GamePage extends BasePage {
         initializeComponents(selectBackground);
     }
 
-    protected void initializeComponents(int selectBackground) {
-        setLayout(new FlowLayout(FlowLayout.LEFT));
+    private void initializeComponents(int selectBackground) {
+        setLayout(new BorderLayout());
 
         createBackground(selectBackground);
-
         createNewButton();
-
         createHookObject();
-
-        startTimer();
 
         // Set Thread for item
         for (int i = 0; i < itemAmount; i++) {
             setItemLabel(this);
         }
+
+        try{
+            itemLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        createPauseMenu();
 
         // Set SwingWorker for hook
         SwingWorker<Void, Void> hookWorker = new SwingWorker<Void, Void>() {
@@ -75,9 +84,20 @@ public class GamePage extends BasePage {
             }
         };
         hookWorker.execute();
+
+        startTimer();
     }
 
-    private void createBackground(int selectBackground){
+    private void createPauseMenu() {
+        pauseMenu = new PauseMenu(0.7f, cardPanel, cardLayout, this);
+        pauseMenu.setBackground(new Color(31, 31, 31, 255));
+        pauseMenu.setVisibility(false);
+        add(pauseMenu, BorderLayout.CENTER);
+        setComponentZOrder(pauseMenu, 0);
+    }
+
+
+    private void createBackground(int selectBackground) {
         // Create background from selectBackground ( 5 = random )
         String backgroundPath = "";
         Random random = new Random();
@@ -125,7 +145,7 @@ public class GamePage extends BasePage {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     hookLabel.setMove();
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !gameEnd) {
-                    pause = !pause;
+                    pauseGame();
                 }
             }
 
@@ -156,14 +176,10 @@ public class GamePage extends BasePage {
         settingButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                if(gameEnd){
+                if (gameEnd) {
                     return;
                 }
-
-                pause = !pause;
-                if (!pause) {
-                    GamePage.this.requestFocusInWindow();
-                }
+                pauseGame();
             }
 
             @Override
@@ -195,7 +211,6 @@ public class GamePage extends BasePage {
             if (countdownSeconds[0] > 0) {
                 countdownSeconds[0]--;
                 this.timer = countdownSeconds[0]; // Update the class variable
-                System.out.println("Time left: " + countdownSeconds[0] + " seconds");
             } else {
                 ((Timer) e.getSource()).stop();
                 gameEnd();
@@ -210,10 +225,12 @@ public class GamePage extends BasePage {
             public void run() {
                 boolean firstHit = false;
                 final ItemLabel[] item = {null};
-
                 // Create a new item
                 createNewItem(item);
+
                 add(item[0]);
+
+                itemLatch.countDown();
 
                 while (true) {
 
@@ -249,12 +266,20 @@ public class GamePage extends BasePage {
     }
 
     private void createNewItem(ItemLabel[] item) {
+        int maxAttempts = 100;
+        int attempts = 0;
+
         do {
             item[0] = new ItemLabel();
+            attempts++;
+            if (attempts > maxAttempts) {
+                return;
+            }
         } while (isOverlapping(item[0]));
 
         itemList.add(item[0]);
     }
+
 
     private boolean isOverlapping(ItemLabel newItem) {
         synchronized (itemList) {
@@ -293,10 +318,37 @@ public class GamePage extends BasePage {
         g2d.setStroke(oldStroke);
     }
 
-    private void gameEnd(){
+    private void gameEnd() {
         pause = true;
         gameEnd = true;
         System.out.println("Game End");
+    }
+
+    public void stopGame() {
+        pause = true;
+        gameEnd = true;
+    }
+
+    private void pauseGame() {
+        pause = !pause;
+        SwingUtilities.invokeLater(() -> {
+            pauseMenu.setVisibility(pause);
+            if (!pause) {
+                GamePage.this.requestFocusInWindow();
+            } else {
+                pauseMenu.requestFocusInWindow();
+            }
+            repaint();
+        });
+    }
+
+    public void resumeGame(){
+        pause = false;
+        SwingUtilities.invokeLater(() -> {
+            pauseMenu.setVisibility(pause);
+            GamePage.this.requestFocusInWindow();
+            repaint();
+        });
     }
 
 }

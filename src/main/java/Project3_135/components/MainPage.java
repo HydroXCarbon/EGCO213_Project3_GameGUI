@@ -44,7 +44,7 @@ public class MainPage extends BasePage {
         playButton.addMouseListener(new MyMouseListener("gamePage", playIcon, playIconHover, cardPanel, cardLayout) {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                super.mouseClicked(e);
+
                 // Create a new instance of GamePage and add it to the cardPanel
                 GamePage newGamePage = new GamePage(cardPanel, cardLayout, selectBackground);
                 newGamePage.setName("gamePage");

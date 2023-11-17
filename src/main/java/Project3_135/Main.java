@@ -28,6 +28,7 @@ class MainApplication extends JFrame {
         setSize(framewidth, frameheight);
         setFocusable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         // Create a panel and layout manager for the card panel
         cardLayout = new CardLayout();
