@@ -4,6 +4,7 @@ import Project3_135.Utilities;
 import Project3_135.model.MyDocumentListener;
 import Project3_135.model.MyImageIcon;
 import Project3_135.model.MyMouseListener;
+import Project3_135.model.MySoundEffect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.*;
 public class MainPage extends BasePage {
 
     private Integer selectBackground = 5;
+    private MySoundEffect startSound = new MySoundEffect(Utilities.START_SOUND_PATH);
 
     public MainPage(JPanel cardPanel, CardLayout cardLayout) {
         super(cardPanel, cardLayout);
@@ -44,6 +46,8 @@ public class MainPage extends BasePage {
         playButton.addMouseListener(new MyMouseListener("gamePage", playIcon, playIconHover, cardPanel, cardLayout) {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                startSound.setVolume(0.5f);
+                startSound.playOnce();
 
                 // Create a new instance of GamePage and add it to the cardPanel
                 GamePage newGamePage = new GamePage(cardPanel, cardLayout, selectBackground);

@@ -1,10 +1,7 @@
 package Project3_135.components;
 
 import Project3_135.Utilities;
-import Project3_135.model.HookLabel;
-import Project3_135.model.ItemLabel;
-import Project3_135.model.MyImageIcon;
-import Project3_135.model.PauseMenu;
+import Project3_135.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +17,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class GamePage extends BasePage {
 
+    private final MySoundEffect finishSound = new MySoundEffect(Utilities.FINISH_SOUND_PATH);
     private final int itemAmount = Utilities.ITEMAMOUNT;
     private final int[] line = new int[4];
     private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
@@ -43,7 +41,6 @@ public class GamePage extends BasePage {
         setLayout(new BorderLayout());
 
         createBackground(selectBackground);
-        createNewButton();
         createHookObject();
 
         // Set Thread for item
@@ -51,13 +48,35 @@ public class GamePage extends BasePage {
             setItemLabel(this);
         }
 
-        try{
+        try {
             itemLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         createPauseMenu();
+
+        // Add key listener
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    hookLabel.setMove();
+                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !gameEnd) {
+                    pauseGame();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         // Set SwingWorker for hook
         SwingWorker<Void, Void> hookWorker = new SwingWorker<Void, Void>() {
@@ -132,73 +151,6 @@ public class GamePage extends BasePage {
 
         // Add components
         add(hookLabel);
-
-        // Add key listener
-        this.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    hookLabel.setMove();
-                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !gameEnd) {
-                    pauseGame();
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
-    }
-
-    private void createNewButton() {
-        // Create a panel for the top-left corner
-        JPanel topLeftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        topLeftPanel.setOpaque(false);
-        add(topLeftPanel, BorderLayout.NORTH);
-
-        // Load the default image icons
-        ImageIcon pauseIcon = new MyImageIcon(Utilities.STONE_SETTING_BUTTON_IMAGE_PATH).resize(70);
-
-        // Load the hover image icons
-        ImageIcon pauseIconHover = new MyImageIcon(Utilities.STONE_SETTING_BUTTON_HOVER_IMAGE_PATH).resize(70);
-
-        // Create the settingButton with default icons
-        JButton settingButton = createButton(pauseIcon);
-        settingButton.setOpaque(false);
-
-        // Add components listener to the buttons
-        settingButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (gameEnd) {
-                    return;
-                }
-                pauseGame();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                if (e.getComponent() instanceof JButton) {
-                    ((JButton) e.getComponent()).setIcon(pauseIconHover);
-                }
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                if (e.getComponent() instanceof JButton) {
-                    ((JButton) e.getComponent()).setIcon(pauseIcon);
-                }
-            }
-        });
-
-        // Add the button to the top-left panel with FlowLayout
-        topLeftPanel.add(settingButton);
     }
 
     private void startTimer() {
@@ -280,7 +232,6 @@ public class GamePage extends BasePage {
         itemList.add(item[0]);
     }
 
-
     private boolean isOverlapping(ItemLabel newItem) {
         synchronized (itemList) {
             for (ItemLabel existingItem : itemList) {
@@ -291,7 +242,6 @@ public class GamePage extends BasePage {
             return false;
         }
     }
-
 
     synchronized private void updateScore(int score) {
         totalScore += score;
@@ -312,7 +262,6 @@ public class GamePage extends BasePage {
 
         // Draw the line
         g2d.drawLine(line[0], line[1], line[2], line[3]);
-        //g2d.drawLine(0, 0, 2000, 500);
 
         // Restore the original stroke
         g2d.setStroke(oldStroke);
@@ -321,7 +270,12 @@ public class GamePage extends BasePage {
     private void gameEnd() {
         pause = true;
         gameEnd = true;
-        System.out.println("Game End");
+        finishSound.setVolume(0.5f);
+        finishSound.playOnce();
+    }
+
+    public boolean checkGameEnd(){
+        return gameEnd;
     }
 
     public void stopGame() {
@@ -329,20 +283,15 @@ public class GamePage extends BasePage {
         gameEnd = true;
     }
 
-    private void pauseGame() {
+    public void pauseGame() {
         pause = !pause;
         SwingUtilities.invokeLater(() -> {
             pauseMenu.setVisibility(pause);
-            if (!pause) {
-                GamePage.this.requestFocusInWindow();
-            } else {
-                pauseMenu.requestFocusInWindow();
-            }
             repaint();
         });
     }
 
-    public void resumeGame(){
+    public void resumeGame() {
         pause = false;
         SwingUtilities.invokeLater(() -> {
             pauseMenu.setVisibility(pause);

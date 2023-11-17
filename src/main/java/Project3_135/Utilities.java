@@ -20,6 +20,8 @@ public interface Utilities {
     static final String STONE_SETTING_BUTTON_HOVER_IMAGE_PATH  = PATH + "stone_setting_button_hover.png";
     static final String THEME_SOUND_PATH  = PATH + "maintheme.wav";
     static final String ROCKHIT_SOUND_PATH  = PATH + "rockhit.wav";
+    static final String FINISH_SOUND_PATH  = PATH + "finish.wav";
+    static final String START_SOUND_PATH  = PATH + "start.wav";
 
     // Frame setting
     int FRAMEWIDTH = 1366;
