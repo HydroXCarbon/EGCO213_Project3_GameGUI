@@ -22,6 +22,9 @@ public class MyMouseListener extends MouseAdapter {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
+        if(path == null){
+            return;
+        }
         cardLayout.show(cardPanel, path);
 
         // Find the index of the component and set focus

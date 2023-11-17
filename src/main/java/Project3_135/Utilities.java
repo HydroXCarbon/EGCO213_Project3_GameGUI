@@ -12,7 +12,12 @@ public interface Utilities {
     static final String GOLDORE_LARGE_IMAGE_PATH  = PATH + "goldore_large.png";
     static final String ROCK_SMALL_IMAGE_PATH  = PATH + "rock_small.png";
     static final String ROCK_LARGE_IMAGE_PATH  = PATH + "rock_large.png";
-    static final String BACKGROUND_IMAGE_PATH  = PATH + "background.png";
+    static final String BACKGROUND1_IMAGE_PATH  = PATH + "background1.png";
+    static final String BACKGROUND2_IMAGE_PATH  = PATH + "background2.png";
+    static final String BACKGROUND3_IMAGE_PATH  = PATH + "background1.png";
+    static final String BACKGROUND4_IMAGE_PATH  = PATH + "background2.png";
+    static final String STONE_SETTING_BUTTON_IMAGE_PATH  = PATH + "stone_setting_button.png";
+    static final String STONE_SETTING_BUTTON_HOVER_IMAGE_PATH  = PATH + "stone_setting_button_hover.png";
     static final String THEME_SOUND_PATH  = PATH + "maintheme.wav";
     static final String ROCKHIT_SOUND_PATH  = PATH + "rockhit.wav";
 
@@ -31,10 +36,10 @@ public interface Utilities {
     int[] SPAWNCONDITION1 = {200, 600, 10, 15};
     int[] SPAWNCONDITION2 = {250, 650, 20, 10};
     int[] SPAWNCONDITION3 = {300, 600, 40, 30};
-    int[] SPAWNCONDITION4 = {300, 650, 100, 12};
-    int[] SPAWNCONDITION5 = {600, 650, 300, 15};
+    int[] SPAWNCONDITION4 = {300, 620, 100, 12};
+    int[] SPAWNCONDITION5 = {600, 620, 300, 15};
 
     // Game setting
     int ITEMAMOUNT = 30;
-
+    int GAMETIME = 45;
 }

@@ -10,6 +10,8 @@ import java.awt.*;
 
 public class MainPage extends BasePage {
 
+    private Integer selectBackground = 5;
+
     public MainPage(JPanel cardPanel, CardLayout cardLayout) {
         super(cardPanel, cardLayout);
         initializeComponents();
@@ -44,7 +46,7 @@ public class MainPage extends BasePage {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 super.mouseClicked(e);
                 // Create a new instance of GamePage and add it to the cardPanel
-                GamePage newGamePage = new GamePage(cardPanel, cardLayout);
+                GamePage newGamePage = new GamePage(cardPanel, cardLayout, selectBackground);
                 newGamePage.setName("gamePage");
                 cardPanel.add(newGamePage, "gamePage");
                 cardLayout.show(cardPanel, "gamePage");

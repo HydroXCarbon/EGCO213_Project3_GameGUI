@@ -9,32 +9,101 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GamePage extends BasePage {
 
     private final int itemAmount = Utilities.ITEMAMOUNT;
     private final int[] line = new int[4];
+    private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
+    private int timer;
     private int totalScore = 0;
     private int itemCount = 0;
     private HookLabel hookLabel;
     private Image backgroundImage;
-    private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
+    private boolean pause = false;
+    private boolean gameEnd = false;
 
 
-    public GamePage(JPanel cardPanel, CardLayout cardLayout) {
+    public GamePage(JPanel cardPanel, CardLayout cardLayout, int selectBackground) {
         super(cardPanel, cardLayout);
-
-        initializeComponents();
+        initializeComponents(selectBackground);
     }
 
-    protected void initializeComponents() {
-        setLayout(new BorderLayout());
+    protected void initializeComponents(int selectBackground) {
+        setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        // Create background
-        backgroundImage = new MyImageIcon(Utilities.BACKGROUND_IMAGE_PATH).getImage();
+        createBackground(selectBackground);
 
+        createNewButton();
+
+        createHookObject();
+
+        startTimer();
+
+        // Set Thread for item
+        for (int i = 0; i < itemAmount; i++) {
+            setItemLabel(this);
+        }
+
+        // Set SwingWorker for hook
+        SwingWorker<Void, Void> hookWorker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                while (true) {
+                    if (pause) {
+                        Thread.sleep(10);
+                        continue;
+                    }
+                    hookLabel.updateLocation();
+                    if (itemCount == itemAmount) {
+                        break;
+                    }
+                    publish();
+                    repaint();
+                }
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                gameEnd();
+            }
+        };
+        hookWorker.execute();
+    }
+
+    private void createBackground(int selectBackground){
+        // Create background from selectBackground ( 5 = random )
+        String backgroundPath = "";
+        Random random = new Random();
+
+        if (selectBackground == 5) {
+            selectBackground = random.nextInt(4) + 1;
+        }
+
+        switch (selectBackground) {
+            case 1:
+                backgroundPath = Utilities.BACKGROUND1_IMAGE_PATH;
+                break;
+            case 2:
+                backgroundPath = Utilities.BACKGROUND2_IMAGE_PATH;
+                break;
+            case 3:
+                backgroundPath = Utilities.BACKGROUND3_IMAGE_PATH;
+                break;
+            case 4:
+                backgroundPath = Utilities.BACKGROUND4_IMAGE_PATH;
+                break;
+        }
+        backgroundImage = new MyImageIcon(backgroundPath).getImage();
+    }
+
+    private void createHookObject() {
         // Create object
         hookLabel = new HookLabel(this, line);
 
@@ -42,7 +111,6 @@ public class GamePage extends BasePage {
         hookLabel.setInitial(Utilities.FRAMEWIDTH / 2, 150);
 
         // Add components
-
         add(hookLabel);
 
         // Add key listener
@@ -56,6 +124,8 @@ public class GamePage extends BasePage {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     hookLabel.setMove();
+                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !gameEnd) {
+                    pause = !pause;
                 }
             }
 
@@ -64,37 +134,75 @@ public class GamePage extends BasePage {
 
             }
         });
+    }
 
-        // Set Thread for item
-        for (int i = 0; i < itemAmount; i++) {
-            setItemLabel(this);
-        }
+    private void createNewButton() {
+        // Create a panel for the top-left corner
+        JPanel topLeftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topLeftPanel.setOpaque(false);
+        add(topLeftPanel, BorderLayout.NORTH);
 
-        // Set SwingWorker for hook
-        SwingWorker<Void, Void> hookWorker = new SwingWorker<Void, Void>() {
+        // Load the default image icons
+        ImageIcon pauseIcon = new MyImageIcon(Utilities.STONE_SETTING_BUTTON_IMAGE_PATH).resize(70);
+
+        // Load the hover image icons
+        ImageIcon pauseIconHover = new MyImageIcon(Utilities.STONE_SETTING_BUTTON_HOVER_IMAGE_PATH).resize(70);
+
+        // Create the settingButton with default icons
+        JButton settingButton = createButton(pauseIcon);
+        settingButton.setOpaque(false);
+
+        // Add components listener to the buttons
+        settingButton.addMouseListener(new MouseAdapter() {
             @Override
-            protected Void doInBackground() throws Exception {
-                while (true) {
-                    hookLabel.updateLocation();
-                    if (itemCount == itemAmount) {
-                        break;
-                    }
-                    publish();
-                    repaint();
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if(gameEnd){
+                    return;
                 }
-                return null;
+
+                pause = !pause;
+                if (!pause) {
+                    GamePage.this.requestFocusInWindow();
+                }
             }
 
             @Override
-            protected void done() {
-                cardLayout.show(cardPanel, "mainPage");
-                repaint(); // Ensure final repaint on the main UI thread
+            public void mouseEntered(MouseEvent e) {
+                if (e.getComponent() instanceof JButton) {
+                    ((JButton) e.getComponent()).setIcon(pauseIconHover);
+                }
             }
-        };
 
-        hookWorker.execute(); // Start the SwingWorker
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (e.getComponent() instanceof JButton) {
+                    ((JButton) e.getComponent()).setIcon(pauseIcon);
+                }
+            }
+        });
 
+        // Add the button to the top-left panel with FlowLayout
+        topLeftPanel.add(settingButton);
+    }
 
+    private void startTimer() {
+        final int[] countdownSeconds = {Utilities.GAMETIME + 1};
+
+        Timer timer = new Timer(1000, e -> {
+            if (pause) {
+                return;
+            }
+            if (countdownSeconds[0] > 0) {
+                countdownSeconds[0]--;
+                this.timer = countdownSeconds[0]; // Update the class variable
+                System.out.println("Time left: " + countdownSeconds[0] + " seconds");
+            } else {
+                ((Timer) e.getSource()).stop();
+                gameEnd();
+            }
+        });
+
+        timer.start();
     }
 
     private void setItemLabel(GamePage gamePage) {
@@ -102,10 +210,10 @@ public class GamePage extends BasePage {
             public void run() {
                 boolean firstHit = false;
                 final ItemLabel[] item = {null};
+
                 // Create a new item
                 createNewItem(item);
                 add(item[0]);
-                //SwingUtilities.invokeLater(() -> gamePage.add(item[0]));
 
                 while (true) {
 
@@ -183,6 +291,12 @@ public class GamePage extends BasePage {
 
         // Restore the original stroke
         g2d.setStroke(oldStroke);
+    }
+
+    private void gameEnd(){
+        pause = true;
+        gameEnd = true;
+        System.out.println("Game End");
     }
 
 }

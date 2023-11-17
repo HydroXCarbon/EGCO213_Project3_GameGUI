@@ -7,9 +7,11 @@ import java.awt.*;
 
 public class SettingPage extends BasePage {
     private JSlider slider;
+    private Integer selectBackground;
 
-    public SettingPage(JPanel cardPanel, CardLayout cardLayout, MySoundEffect themeSound) {
+    public SettingPage(JPanel cardPanel, CardLayout cardLayout, MySoundEffect themeSound, Integer selectBackground) {
         super(cardPanel, cardLayout);
+        this.selectBackground = selectBackground;
         initializeComponents(themeSound);
     }
 

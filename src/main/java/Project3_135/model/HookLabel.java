@@ -23,7 +23,7 @@ public class HookLabel extends JLabel {
     private double speed;
     private double radius;
     private double angle = Math.toRadians(270);
-    private final double angularSpeed = Math.toRadians(0.1);
+    private double angularSpeed = Math.toRadians(0.1);
     private boolean rotateRight = true;
     private boolean move = false;
     private boolean moveDown = true;
