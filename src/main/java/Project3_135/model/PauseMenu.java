@@ -12,16 +12,20 @@ import java.awt.event.MouseEvent;
 
 public class PauseMenu extends JPanel {
 
+    private GamePage pf;
+    private CardLayout cardLayout;
+    private JLabel countdownLabel;
+    private JLabel scoreLabel;
+    private JLabel pauseLabel;
+    private JPanel cardPanel;
+    private JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 20));
+    private JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 150, 0));
     private JButton mainMenuButton;
     private JButton backButton;
     private JButton settingButton;
     private float opacity;
     private float originalOpacity;
-    private JPanel cardPanel;
-    private CardLayout cardLayout;
-    private GamePage pf;
-    private JPanel centerPanel;
-    private volatile boolean visible;
+
 
     public PauseMenu(float opacity, JPanel cardPanel, CardLayout cardLayout, GamePage pf) {
         this.pf = pf;
@@ -37,6 +41,10 @@ public class PauseMenu extends JPanel {
     private void initializeComponents() {
         setLayout(new BorderLayout());
         setVisible(true);
+
+        createScoreCounter();
+        createCountdownLabel();
+        createPauseLabel();
 
         // Load the default image icons
         ImageIcon mainMenuIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(100);
@@ -60,6 +68,7 @@ public class PauseMenu extends JPanel {
                 if (pf.checkGameEnd()) {
                     return;
                 }
+                pf.requestFocus();
                 pf.pauseGame();
             }
 
@@ -87,6 +96,7 @@ public class PauseMenu extends JPanel {
                     pf.stopGame();
                     super.mouseClicked(e);
                 }
+                pf.requestFocus();
             }
         });
 
@@ -97,35 +107,56 @@ public class PauseMenu extends JPanel {
             }
         });
 
-        // Create a panel for the top-left corner
-        JPanel topLeftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 0));
-        topLeftPanel.setOpaque(false);
-        topLeftPanel.add(settingButton);
+        // Add components to the top panel
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 50, 60));
+        rightPanel.setPreferredSize(new Dimension(1150, 110));
+        rightPanel.setOpaque(false);
+        rightPanel.add(scoreLabel);
+        rightPanel.add(countdownLabel);
+        topPanel.setOpaque(false);
+        topPanel.add(settingButton);
+        topPanel.add(rightPanel);
 
-        // Create a panel for the center region with a vertical box layout
-        centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 150, 0));
+        // Add components to the center panel
         centerPanel.setOpaque(false);
+        centerPanel.add(pauseLabel);
+        centerPanel.add(mainMenuButton);
+        centerPanel.add(backButton);
 
-
-        // Add "Pause" text to the center panel
-        JLabel pauseLabel = new JLabel("Pause", SwingConstants.CENTER);
-        pauseLabel.setForeground(Color.WHITE);
-        pauseLabel.setFont(new Font("Arial", Font.BOLD, 200));
-        centerPanel.add(pauseLabel, BorderLayout.NORTH);
-
-        // Add buttons to the center panel
-        centerPanel.add(mainMenuButton, BorderLayout.SOUTH);
-        centerPanel.add(backButton, BorderLayout.SOUTH);
-
-        // Add the top-left panel to the main panel
-        add(topLeftPanel, BorderLayout.NORTH);
-        // Add the center panel to the main panel
+        // Add the Panel to the frame
+        add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
     }
 
+    public void setScore(int score){
+        scoreLabel.setText(String.valueOf(score));
+    }
+
+    public void setCountdown(int countdown){
+        countdownLabel.setText(String.valueOf(countdown));
+    }
+
+    private void createPauseLabel(){
+        pauseLabel = new JLabel("Pause", SwingConstants.CENTER);
+        pauseLabel.setForeground(Color.WHITE);
+        pauseLabel.setFont(new Font("Arial", Font.BOLD, 200));
+    }
+
+    private void createScoreCounter(){
+        scoreLabel = new JLabel(String.valueOf(0));
+        scoreLabel.setPreferredSize(new Dimension(120, 50));
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font("Monaco", Font.BOLD, 50));
+    }
+
+    private void createCountdownLabel() {
+        countdownLabel = new JLabel(String.valueOf(Utilities.GAMETIME));
+        countdownLabel.setPreferredSize(new Dimension(100, 50));
+        countdownLabel.setForeground(Color.WHITE);
+        countdownLabel.setFont(new Font("Monaco", Font.BOLD, 50));
+    }
 
     public void setVisibility(boolean visible) {
-        this.visible = visible;
         centerPanel.setVisible(visible);
         if(visible){
             opacity = originalOpacity;

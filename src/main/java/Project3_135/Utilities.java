@@ -3,25 +3,25 @@ package Project3_135;
 public interface Utilities {
 
     // Resource path
-    static final String PATH             = "src/main/java/Project3_135/assets/";
-    static final String PLAY_IMAGE_PATH  = PATH + "play.png";
-    static final String PLAY_HOVER_PATH  = PATH + "play_hover.png";
-    static final String HOOK_IMAGE_PATH  = PATH + "hook.png";
-    static final String DIAMOND_IMAGE_PATH  = PATH + "diamond.png";
-    static final String GOLDORE_SMALL_IMAGE_PATH  = PATH + "goldore_small.png";
-    static final String GOLDORE_LARGE_IMAGE_PATH  = PATH + "goldore_large.png";
-    static final String ROCK_SMALL_IMAGE_PATH  = PATH + "rock_small.png";
-    static final String ROCK_LARGE_IMAGE_PATH  = PATH + "rock_large.png";
-    static final String BACKGROUND1_IMAGE_PATH  = PATH + "background1.png";
-    static final String BACKGROUND2_IMAGE_PATH  = PATH + "background2.png";
-    static final String BACKGROUND3_IMAGE_PATH  = PATH + "background1.png";
-    static final String BACKGROUND4_IMAGE_PATH  = PATH + "background2.png";
-    static final String STONE_SETTING_BUTTON_IMAGE_PATH  = PATH + "stone_setting_button.png";
-    static final String STONE_SETTING_BUTTON_HOVER_IMAGE_PATH  = PATH + "stone_setting_button_hover.png";
-    static final String THEME_SOUND_PATH  = PATH + "maintheme.wav";
-    static final String ROCKHIT_SOUND_PATH  = PATH + "rockhit.wav";
-    static final String FINISH_SOUND_PATH  = PATH + "finish.wav";
-    static final String START_SOUND_PATH  = PATH + "start.wav";
+    static final String PATH                                     = "src/main/java/Project3_135/assets/";
+    static final String PLAY_IMAGE_PATH                          = PATH + "play.png";
+    static final String PLAY_HOVER_PATH                          = PATH + "play_hover.png";
+    static final String HOOK_IMAGE_PATH                          = PATH + "hook.png";
+    static final String DIAMOND_IMAGE_PATH                       = PATH + "diamond.png";
+    static final String GOLDORE_SMALL_IMAGE_PATH                 = PATH + "goldore_small.png";
+    static final String GOLDORE_LARGE_IMAGE_PATH                 = PATH + "goldore_large.png";
+    static final String ROCK_SMALL_IMAGE_PATH                    = PATH + "rock_small.png";
+    static final String ROCK_LARGE_IMAGE_PATH                    = PATH + "rock_large.png";
+    static final String BACKGROUND1_IMAGE_PATH                   = PATH + "background1.png";
+    static final String BACKGROUND2_IMAGE_PATH                   = PATH + "background2.png";
+    static final String BACKGROUND3_IMAGE_PATH                   = PATH + "background1.png";
+    static final String BACKGROUND4_IMAGE_PATH                   = PATH + "background2.png";
+    static final String STONE_SETTING_BUTTON_IMAGE_PATH          = PATH + "stone_setting_button.png";
+    static final String STONE_SETTING_BUTTON_HOVER_IMAGE_PATH    = PATH + "stone_setting_button_hover.png";
+    static final String THEME_SOUND_PATH                         = PATH + "maintheme.wav";
+    static final String ROCKHIT_SOUND_PATH                       = PATH + "rockhit.wav";
+    static final String FINISH_SOUND_PATH                        = PATH + "finish.wav";
+    static final String START_SOUND_PATH                         = PATH + "start.wav";
 
     // Frame setting
     int FRAMEWIDTH = 1366;

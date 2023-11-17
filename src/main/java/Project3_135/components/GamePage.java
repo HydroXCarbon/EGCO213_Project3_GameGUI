@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -17,17 +15,16 @@ import java.util.concurrent.CountDownLatch;
 
 public class GamePage extends BasePage {
 
-    private final MySoundEffect finishSound = new MySoundEffect(Utilities.FINISH_SOUND_PATH);
-    private final int itemAmount = Utilities.ITEMAMOUNT;
-    private final int[] line = new int[4];
-    private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
-    private final CountDownLatch itemLatch = new CountDownLatch(itemAmount);
     private PauseMenu pauseMenu;
-    private int timer;
-    private int totalScore = 0;
-    private int itemCount = 0;
     private HookLabel hookLabel;
     private Image backgroundImage;
+    private int totalScore = 0;
+    private int itemCount = 0;
+    private final int[] line = new int[4];
+    private final int itemAmount = Utilities.ITEMAMOUNT;
+    private final List<ItemLabel> itemList = new CopyOnWriteArrayList<>();
+    private final CountDownLatch itemLatch = new CountDownLatch(itemAmount);
+    private final MySoundEffect finishSound = new MySoundEffect(Utilities.FINISH_SOUND_PATH);
     private boolean pause = false;
     private boolean gameEnd = false;
 
@@ -60,7 +57,6 @@ public class GamePage extends BasePage {
         this.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
@@ -154,7 +150,7 @@ public class GamePage extends BasePage {
     }
 
     private void startTimer() {
-        final int[] countdownSeconds = {Utilities.GAMETIME + 1};
+        final int[] countdownSeconds = {Utilities.GAMETIME};
 
         Timer timer = new Timer(1000, e -> {
             if (pause) {
@@ -162,7 +158,7 @@ public class GamePage extends BasePage {
             }
             if (countdownSeconds[0] > 0) {
                 countdownSeconds[0]--;
-                this.timer = countdownSeconds[0]; // Update the class variable
+                pauseMenu.setCountdown(countdownSeconds[0]+ 1);
             } else {
                 ((Timer) e.getSource()).stop();
                 gameEnd();
@@ -238,6 +234,9 @@ public class GamePage extends BasePage {
                 if (existingItem.getBounds().intersects(newItem.getBounds())) {
                     return true;
                 }
+                if(hookLabel.getOriginalBound().intersects(newItem.getBounds())){
+                    return true;
+                }
             }
             return false;
         }
@@ -245,6 +244,7 @@ public class GamePage extends BasePage {
 
     synchronized private void updateScore(int score) {
         totalScore += score;
+        pauseMenu.setScore(totalScore);
     }
 
     @Override
@@ -274,7 +274,7 @@ public class GamePage extends BasePage {
         finishSound.playOnce();
     }
 
-    public boolean checkGameEnd(){
+    public boolean checkGameEnd() {
         return gameEnd;
     }
 
