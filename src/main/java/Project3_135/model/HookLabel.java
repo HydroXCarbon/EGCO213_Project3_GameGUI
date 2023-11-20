@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class HookLabel extends JLabel {
 
@@ -29,13 +30,10 @@ public class HookLabel extends JLabel {
     private boolean moveDown = true;
     private final boolean setOriginalSpeed = false;
 
-    public HookLabel(GamePage gamePage, int[] line) {
-        // Load the image icons
-        ImageIcon hookIcon = new MyImageIcon(Utilities.HOOK_IMAGE_PATH).resize(20);
-        setIcon(hookIcon);
+    public HookLabel(GamePage gamePage, int[] line, int selectedIcon) {
 
         this.gamePage = gamePage;
-        this.hookIcon = hookIcon;
+        this.hookIcon = createIcon(selectedIcon);
         this.line = line;
         this.radius = this.originalRadius;
         this.speed = this.originalSpeed;
@@ -64,6 +62,39 @@ public class HookLabel extends JLabel {
 
     public void isCatch() {
         moveDown = false;
+    }
+
+    private Icon createIcon(int selectedIcon) {
+        String hookPath = "";
+        int size = 100;
+        Random random = new Random();
+
+        if (selectedIcon == 5) {
+            selectedIcon = random.nextInt(4) + 1;
+        }
+
+        switch (selectedIcon) {
+            case 1:
+                hookPath = Utilities.HOOK1_IMAGE_PATH;
+                size = 35;
+                break;
+            case 2:
+                hookPath = Utilities.HOOK2_IMAGE_PATH;
+                size = 35;
+                break;
+            case 3:
+                hookPath = Utilities.HOOK3_IMAGE_PATH;
+                size = 23;
+                break;
+            case 4:
+                hookPath = Utilities.HOOK4_IMAGE_PATH;
+                size = 32;
+                break;
+        }
+
+        ImageIcon hookIcon = new MyImageIcon(hookPath).resize(size);
+        setIcon(hookIcon);
+        return hookIcon;
     }
 
     public void updateLocation() {

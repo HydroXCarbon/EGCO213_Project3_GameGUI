@@ -51,9 +51,10 @@ public class MainPage extends BasePage {
 
                 // Update selectBackground before creating the GamePage instance
                 int selectBackground = ((SettingPage) getComponentByName("settingPage")).getSelectBackground();
-                System.out.println(selectBackground);
+                int selectIcon = ((SettingPage) getComponentByName("settingPage")).getSelectIcon();
+
                 // Create a new instance of GamePage and add it to the cardPanel
-                GamePage newGamePage = new GamePage(cardPanel, cardLayout, selectBackground);
+                GamePage newGamePage = new GamePage(cardPanel, cardLayout, selectBackground, selectIcon);
                 newGamePage.setName("gamePage");
                 cardPanel.add(newGamePage, "gamePage");
                 cardLayout.show(cardPanel, "gamePage");

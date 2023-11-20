@@ -6,7 +6,11 @@ public interface Utilities {
     static final String PATH                                     = "src/main/java/Project3_135/assets/";
     static final String PLAY_IMAGE_PATH                          = PATH + "play.png";
     static final String PLAY_HOVER_PATH                          = PATH + "play_hover.png";
-    static final String HOOK_IMAGE_PATH                          = PATH + "hook.png";
+    static final String HOOK1_IMAGE_PATH                         = PATH + "hook1.png";
+    static final String HOOK2_IMAGE_PATH                         = PATH + "hook2.png";
+    static final String HOOK3_IMAGE_PATH                         = PATH + "hook3.png";
+    static final String HOOK4_IMAGE_PATH                         = PATH + "hook4.png";
+    static final String QUESTIONMARK_IMAGE_PATH                  = PATH + "questionmark.png";
     static final String DIAMOND_IMAGE_PATH                       = PATH + "diamond.png";
     static final String GOLDORE_SMALL_IMAGE_PATH                 = PATH + "goldore_small.png";
     static final String GOLDORE_LARGE_IMAGE_PATH                 = PATH + "goldore_large.png";
@@ -14,8 +18,8 @@ public interface Utilities {
     static final String ROCK_LARGE_IMAGE_PATH                    = PATH + "rock_large.png";
     static final String BACKGROUND1_IMAGE_PATH                   = PATH + "background1.png";
     static final String BACKGROUND2_IMAGE_PATH                   = PATH + "background2.png";
-    static final String BACKGROUND3_IMAGE_PATH                   = PATH + "background1.png";
-    static final String BACKGROUND4_IMAGE_PATH                   = PATH + "background2.png";
+    static final String BACKGROUND3_IMAGE_PATH                   = PATH + "background3.png";
+    static final String BACKGROUND4_IMAGE_PATH                   = PATH + "background4.png";
     static final String STONE_SETTING_BUTTON_IMAGE_PATH          = PATH + "stone_setting_button.png";
     static final String STONE_SETTING_BUTTON_HOVER_IMAGE_PATH    = PATH + "stone_setting_button_hover.png";
     static final String THEME_SOUND_PATH                         = PATH + "maintheme.wav";

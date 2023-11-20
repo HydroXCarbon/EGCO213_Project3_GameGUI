@@ -29,16 +29,16 @@ public class GamePage extends BasePage {
     private boolean gameEnd = false;
 
 
-    public GamePage(JPanel cardPanel, CardLayout cardLayout, int selectBackground) {
+    public GamePage(JPanel cardPanel, CardLayout cardLayout, int selectBackground, int selectIcon) {
         super(cardPanel, cardLayout);
-        initializeComponents(selectBackground);
+        initializeComponents(selectBackground, selectIcon);
     }
 
-    private void initializeComponents(int selectBackground) {
+    private void initializeComponents(int selectBackground, int selectIcon) {
         setLayout(new BorderLayout());
 
         createBackground(selectBackground);
-        createHookObject();
+        createHookObject(selectIcon);
 
         // Set Thread for item
         for (int i = 0; i < itemAmount; i++) {
@@ -138,9 +138,10 @@ public class GamePage extends BasePage {
         backgroundImage = new MyImageIcon(backgroundPath).getImage();
     }
 
-    private void createHookObject() {
+    private void createHookObject(int selectIcon) {
         // Create object
-        hookLabel = new HookLabel(this, line);
+
+        hookLabel = new HookLabel(this, line, selectIcon);
 
         // Set initial location for hook
         hookLabel.setInitial(Utilities.FRAMEWIDTH / 2, 150);
