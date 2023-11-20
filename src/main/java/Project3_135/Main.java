@@ -14,7 +14,6 @@ class MainApplication extends JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
     private MySoundEffect themeSound;
-    private Integer selectBackground = 5;
     private final int framewidth = Utilities.FRAMEWIDTH;
     private final int frameheight = Utilities.FRAMEHEIGHT;
 
@@ -40,7 +39,7 @@ class MainApplication extends JFrame {
         themeSound.setVolume(0.5f);
 
         // Create different pages (JPanel) for your application
-        JPanel settingPage = new SettingPage(cardPanel, cardLayout, themeSound, selectBackground);
+        JPanel settingPage = new SettingPage(cardPanel, cardLayout, themeSound);
         settingPage.setName("settingPage");
 
         JPanel creditPage = new Page(cardPanel, cardLayout);

@@ -26,5 +26,15 @@ public abstract class BasePage extends JPanel{
         button.setContentAreaFilled(false);
         button.setBorder(new EmptyBorder(50, 0, 0, 0));
     }
+
+    protected Component getComponentByName(String name) {
+        Component[] components = cardPanel.getComponents();
+        for (Component component : components) {
+            if (component instanceof BasePage && component.getName().equals(name)) {
+                return component;
+            }
+        }
+        return null;
+    }
 }
 

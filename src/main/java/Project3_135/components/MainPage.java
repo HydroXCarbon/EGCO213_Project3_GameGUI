@@ -11,8 +11,8 @@ import java.awt.*;
 
 public class MainPage extends BasePage {
 
-    private Integer selectBackground = 5;
     private MySoundEffect startSound = new MySoundEffect(Utilities.START_SOUND_PATH);
+
 
     public MainPage(JPanel cardPanel, CardLayout cardLayout) {
         super(cardPanel, cardLayout);
@@ -49,6 +49,9 @@ public class MainPage extends BasePage {
                 startSound.setVolume(0.5f);
                 startSound.playOnce();
 
+                // Update selectBackground before creating the GamePage instance
+                int selectBackground = ((SettingPage) getComponentByName("settingPage")).getSelectBackground();
+                System.out.println(selectBackground);
                 // Create a new instance of GamePage and add it to the cardPanel
                 GamePage newGamePage = new GamePage(cardPanel, cardLayout, selectBackground);
                 newGamePage.setName("gamePage");
