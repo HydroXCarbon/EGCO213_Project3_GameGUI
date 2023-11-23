@@ -242,6 +242,7 @@ public class SettingPage extends BasePage {
         sliderHolder.setPreferredSize(new Dimension(getWidth() * 7 / 10, getHeight()));
         sliderHolder.add(slider);
 
+        componentHolder.setOpaque(false);
         componentHolder.add(sliderHolder);
     }
 

@@ -1,5 +1,6 @@
 package Project3_135;
 
+import Project3_135.components.CreditPage;
 import Project3_135.components.SettingPage;
 import Project3_135.model.MySoundEffect;
 import Project3_135.components.MainPage;
@@ -42,7 +43,7 @@ class MainApplication extends JFrame {
         JPanel settingPage = new SettingPage(cardPanel, cardLayout, themeSound);
         settingPage.setName("settingPage");
 
-        JPanel creditPage = new Page(cardPanel, cardLayout);
+        JPanel creditPage = new CreditPage(cardPanel, cardLayout);
         creditPage.setName("creditPage");
 
         JPanel mainPage = new MainPage(cardPanel, cardLayout);

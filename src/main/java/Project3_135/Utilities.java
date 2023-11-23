@@ -35,7 +35,8 @@ public interface Utilities {
     static final String FINISH_SOUND_PATH                        = PATH + "finish.wav";
     static final String START_SOUND_PATH                         = PATH + "start.wav";
     static final String MAINMENU_BACKGROUND_PATH                 = PATH + "mainmenu_background.png";
-    static final String SETTING_BACKGROUND_PATH                  = PATH + "setting_background.png";
+    static final String SETTING_BACKGROUND_PATH                  = PATH + "mainmenu_background_dark.png";
+    static final String CREDIT_BACKGROUND_PATH                  = PATH + "mainmenu_background_dark.png";
     static final String GAMEEND_BACKGROUND_PATH                  = PATH + "gamend_background.png";
 
     // Frame setting
@@ -58,5 +59,5 @@ public interface Utilities {
 
     // Game setting
     int ITEMAMOUNT = 30;
-    int GAMETIME = 1;
+    int GAMETIME = 45;
 }
