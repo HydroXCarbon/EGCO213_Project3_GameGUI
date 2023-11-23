@@ -20,6 +20,10 @@ public abstract class BasePage extends JPanel{
         return button;
     }
 
+    public void setBorder(int topMargin){
+        setBorder(new EmptyBorder(topMargin, 0, 0, 0));
+    }
+
     protected void setButtonStyle(JButton button) {
         button.setBorderPainted(false);
         button.setFocusPainted(false);

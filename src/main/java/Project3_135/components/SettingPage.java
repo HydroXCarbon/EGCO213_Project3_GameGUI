@@ -54,7 +54,7 @@ public class SettingPage extends BasePage {
 
     private void createComboBox() {
         // Create a combo box
-        String[] iconList = {"hook1", "hook2", "hook3", "hook4", "Random"};
+        String[] iconList = {"Grabber", "Toy Grabber", "Scientist Grabber", "Magnet Hook", "Random"};
         JComboBox<String> iconComboBox = new JComboBox<>(iconList);
         iconComboBox.setSelectedIndex(4);
         iconComboBox.addActionListener(new ActionListener() {
@@ -126,7 +126,7 @@ public class SettingPage extends BasePage {
         JPanel backButtonHolder = new JPanel();
         backButtonHolder.setOpaque(false);
         backButtonHolder.add(backButton);
-        
+
         add(backButtonHolder, BorderLayout.SOUTH);
     }
 
