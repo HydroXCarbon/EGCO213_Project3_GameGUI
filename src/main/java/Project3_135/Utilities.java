@@ -6,6 +6,14 @@ public interface Utilities {
     static final String PATH                                     = "src/main/java/Project3_135/assets/";
     static final String PLAY_IMAGE_PATH                          = PATH + "play.png";
     static final String PLAY_HOVER_PATH                          = PATH + "play_hover.png";
+    static final String BACK_IMAGE_PATH                          = PATH + "ฺback.png";
+    static final String BACK_HOVER_PATH                          = PATH + "back_hover.png";
+    static final String MENU_IMAGE_PATH                          = PATH + "menu.png";
+    static final String MENU_HOVER_PATH                          = PATH + "menu_hover.png";
+    static final String SETTING_IMAGE_PATH                       = PATH + "setting.png";
+    static final String SETTING_HOVER_PATH                       = PATH + "setting_hover.png";
+    static final String CREDIT_IMAGE_PATH                        = PATH + "credit.png";
+    static final String CREDIT_HOVER_PATH                        = PATH + "credit_hover.png";
     static final String HOOK1_IMAGE_PATH                         = PATH + "hook1.png";
     static final String HOOK2_IMAGE_PATH                         = PATH + "hook2.png";
     static final String HOOK3_IMAGE_PATH                         = PATH + "hook3.png";
@@ -26,6 +34,9 @@ public interface Utilities {
     static final String ROCKHIT_SOUND_PATH                       = PATH + "rockhit.wav";
     static final String FINISH_SOUND_PATH                        = PATH + "finish.wav";
     static final String START_SOUND_PATH                         = PATH + "start.wav";
+    static final String MAINMENU_BACKGROUND_PATH                 = PATH + "mainmenu_background.png";
+    static final String SETTING_BACKGROUND_PATH                  = PATH + "setting_background.png";
+    static final String GAMEEND_BACKGROUND_PATH                  = PATH + "gamend_background.png";
 
     // Frame setting
     int FRAMEWIDTH = 1366;
@@ -47,5 +58,5 @@ public interface Utilities {
 
     // Game setting
     int ITEMAMOUNT = 30;
-    int GAMETIME = 45;
+    int GAMETIME = 1;
 }

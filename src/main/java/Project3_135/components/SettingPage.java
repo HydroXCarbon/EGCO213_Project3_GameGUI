@@ -18,6 +18,7 @@ public class SettingPage extends BasePage {
     private int selectIcon = 5;
     private final JLabel hookPreview = new JLabel();
     private final JPanel componentHolder = new JPanel();
+    private final String backgroundPath = Utilities.SETTING_BACKGROUND_PATH;
 
     public SettingPage(JPanel cardPanel, CardLayout cardLayout, MySoundEffect themeSound) {
         super(cardPanel, cardLayout);
@@ -265,5 +266,13 @@ public class SettingPage extends BasePage {
         public void actionPerformed(ActionEvent e) {
             selectBackground = buttonData;
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Image backgroundImage = new MyImageIcon(backgroundPath).getImage();
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }

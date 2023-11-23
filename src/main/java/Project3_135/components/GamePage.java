@@ -273,6 +273,13 @@ public class GamePage extends BasePage {
         gameEnd = true;
         finishSound.setVolume(0.5f);
         finishSound.playOnce();
+        SwingUtilities.invokeLater(() -> {
+            GameEndPage newGameEndPage = new GameEndPage(cardPanel, cardLayout, totalScore);
+            newGameEndPage.setName("gameEndPage");
+            cardPanel.add(newGameEndPage, "gameEndPage");
+            cardLayout.show(cardPanel, "gameEndPage");
+        });
+        cardPanel.remove(this);
     }
 
     public boolean checkGameEnd() {
@@ -282,6 +289,7 @@ public class GamePage extends BasePage {
     public void stopGame() {
         pause = true;
         gameEnd = true;
+        cardPanel.remove(this);
     }
 
     public void pauseGame() {

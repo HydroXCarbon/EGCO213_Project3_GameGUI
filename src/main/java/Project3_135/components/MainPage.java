@@ -13,7 +13,7 @@ import java.awt.*;
 public class MainPage extends BasePage {
 
     private final MySoundEffect startSound = new MySoundEffect(Utilities.START_SOUND_PATH);
-
+    private final String backgroundPath = Utilities.MAINMENU_BACKGROUND_PATH;
 
     public MainPage(JPanel cardPanel, CardLayout cardLayout) {
         super(cardPanel, cardLayout);
@@ -75,5 +75,13 @@ public class MainPage extends BasePage {
         add(playButton, BorderLayout.SOUTH);
         add(settingButton, BorderLayout.SOUTH);
         add(creditButton, BorderLayout.SOUTH);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Image backgroundImage = new MyImageIcon(backgroundPath).getImage();
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
