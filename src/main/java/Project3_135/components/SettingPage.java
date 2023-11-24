@@ -119,8 +119,8 @@ public class SettingPage extends BasePage {
     }
 
     private void createBackButton() {
-        ImageIcon backIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(60);
-        ImageIcon backIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(60);
+        ImageIcon backIcon = new MyImageIcon(Utilities.BACK_BUTTON_IMAGE_PATH).resize(60);
+        ImageIcon backIconHover = new MyImageIcon(Utilities.BACK_HOVER_BUTTON_PATH).resize(60);
         JButton backButton = createButton(backIcon);
         backButton.addMouseListener(new MyMouseListener("mainPage", backIcon, backIconHover, cardPanel, cardLayout));
 
@@ -184,6 +184,7 @@ public class SettingPage extends BasePage {
         slider.setPaintTrack(true);
         slider.setFont(new Font("MV Boli", Font.PLAIN, 15));
         slider.setLabelTable(slider.createStandardLabels(10));
+        slider.setOpaque(false);
 
         // Set the custom thumb icon (gray circle)
         slider.setUI(new BasicSliderUI(slider) {

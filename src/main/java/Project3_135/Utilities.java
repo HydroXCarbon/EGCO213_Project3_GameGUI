@@ -4,16 +4,16 @@ public interface Utilities {
 
     // Resource path
     static final String PATH                                     = "src/main/java/Project3_135/assets/";
-    static final String PLAY_IMAGE_PATH                          = PATH + "play.png";
-    static final String PLAY_HOVER_PATH                          = PATH + "play_hover.png";
-    static final String BACK_IMAGE_PATH                          = PATH + "ฺback.png";
-    static final String BACK_HOVER_PATH                          = PATH + "back_hover.png";
-    static final String MENU_IMAGE_PATH                          = PATH + "menu.png";
-    static final String MENU_HOVER_PATH                          = PATH + "menu_hover.png";
-    static final String SETTING_IMAGE_PATH                       = PATH + "setting.png";
-    static final String SETTING_HOVER_PATH                       = PATH + "setting_hover.png";
-    static final String CREDIT_IMAGE_PATH                        = PATH + "credit.png";
-    static final String CREDIT_HOVER_PATH                        = PATH + "credit_hover.png";
+    static final String PLAY_BUTTON_IMAGE_PATH                   = PATH + "playButton.png";
+    static final String PLAY_HOVER_BUTTON_PATH                   = PATH + "play_hoverButton.png";
+    static final String BACK_BUTTON_IMAGE_PATH                   = PATH + "backButton.png";
+    static final String BACK_HOVER_BUTTON_PATH                   = PATH + "back_hoverButton.png";
+    static final String MENU_BUTTON_IMAGE_PATH                   = PATH + "menuButton.png";
+    static final String MENU_HOVER_BUTTON_PATH                   = PATH + "menu_hoverButton.png";
+    static final String SETTING_BUTTON_IMAGE_PATH                = PATH + "settingButton.png";
+    static final String SETTING_HOVER_BUTTON_PATH                = PATH + "setting_hoveButton.png";
+    static final String CREDIT_BUTTON_IMAGE_PATH                 = PATH + "creditButton.png";
+    static final String CREDIT_HOVER_BUTTON_PATH                 = PATH + "credit_hoverButton.png";
     static final String HOOK1_IMAGE_PATH                         = PATH + "hook1.png";
     static final String HOOK2_IMAGE_PATH                         = PATH + "hook2.png";
     static final String HOOK3_IMAGE_PATH                         = PATH + "hook3.png";

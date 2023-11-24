@@ -81,8 +81,8 @@ public class CreditPage extends BasePage {
 
 
     private void createBackButton() {
-        ImageIcon backIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(60);
-        ImageIcon backIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(60);
+        ImageIcon backIcon = new MyImageIcon(Utilities.BACK_BUTTON_IMAGE_PATH).resize(60);
+        ImageIcon backIconHover = new MyImageIcon(Utilities.BACK_HOVER_BUTTON_PATH).resize(60);
 
         JButton backbutton = createButton(backIcon);
         backbutton.addMouseListener(new MyMouseListener("mainPage", backIcon, backIconHover, cardPanel, cardLayout));

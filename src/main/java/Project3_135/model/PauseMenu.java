@@ -47,13 +47,13 @@ public class PauseMenu extends JPanel {
         createPauseLabel();
 
         // Load the default image icons
-        ImageIcon mainMenuIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(95);
-        ImageIcon backIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(95);
+        ImageIcon mainMenuIcon = new MyImageIcon(Utilities.MENU_BUTTON_IMAGE_PATH).resize(95);
+        ImageIcon backIcon = new MyImageIcon(Utilities.BACK_BUTTON_IMAGE_PATH).resize(95);
         ImageIcon pauseIcon = new MyImageIcon(Utilities.STONE_SETTING_BUTTON_IMAGE_PATH).resize(70);
 
         // Load the hover image icons
-        ImageIcon mainMenuIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(95);
-        ImageIcon backIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(95);
+        ImageIcon mainMenuIconHover = new MyImageIcon(Utilities.MENU_HOVER_BUTTON_PATH).resize(95);
+        ImageIcon backIconHover = new MyImageIcon(Utilities.BACK_HOVER_BUTTON_PATH).resize(95);
         ImageIcon pauseIconHover = new MyImageIcon(Utilities.STONE_SETTING_BUTTON_HOVER_IMAGE_PATH).resize(70);
 
         // Create buttons with default icons

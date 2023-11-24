@@ -28,14 +28,14 @@ public class MainPage extends BasePage {
         setBorder(marginBorder);
 
         // Load the default image icons
-        ImageIcon playIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(80);
-        ImageIcon settingIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(60);
-        ImageIcon creditIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(60);
+        ImageIcon playIcon = new MyImageIcon(Utilities.PLAY_BUTTON_IMAGE_PATH).resize(80);
+        ImageIcon settingIcon = new MyImageIcon(Utilities.SETTING_BUTTON_IMAGE_PATH).resize(60);
+        ImageIcon creditIcon = new MyImageIcon(Utilities.CREDIT_BUTTON_IMAGE_PATH).resize(60);
 
         // Load the hover image icons
-        ImageIcon playIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(81);
-        ImageIcon settingIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(61);
-        ImageIcon creditIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(61);
+        ImageIcon playIconHover = new MyImageIcon(Utilities.PLAY_HOVER_BUTTON_PATH).resize(81);
+        ImageIcon settingIconHover = new MyImageIcon(Utilities.SETTING_HOVER_BUTTON_PATH).resize(61);
+        ImageIcon creditIconHover = new MyImageIcon(Utilities.CREDIT_HOVER_BUTTON_PATH).resize(61);
 
         // Create buttons with default icons
         JButton playButton = createButton(playIcon);

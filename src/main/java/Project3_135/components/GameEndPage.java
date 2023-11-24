@@ -40,10 +40,10 @@ public class GameEndPage extends BasePage{
         textArea.setText(endGameMessage);
 
         // Load the default image icons
-        ImageIcon mainMenuIcon = new MyImageIcon(Utilities.PLAY_IMAGE_PATH).resize(70);
+        ImageIcon mainMenuIcon = new MyImageIcon(Utilities.MENU_BUTTON_IMAGE_PATH).resize(70);
 
         // Load the hover image icons
-        ImageIcon mainMenuIconHover = new MyImageIcon(Utilities.PLAY_HOVER_PATH).resize(70);
+        ImageIcon mainMenuIconHover = new MyImageIcon(Utilities.MENU_HOVER_BUTTON_PATH).resize(70);
 
         // Create the button
         JButton mainMenuButton = createButton(mainMenuIcon);
