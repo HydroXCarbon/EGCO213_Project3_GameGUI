@@ -19,6 +19,7 @@ public class SettingPage extends BasePage {
     private final JLabel hookPreview = new JLabel();
     private final JPanel componentHolder = new JPanel();
     private final String backgroundPath = Utilities.SETTING_BACKGROUND_PATH;
+    private final String signBackgroundPath = Utilities.SIGN_BACKGROUND_PATH;
 
     public SettingPage(JPanel cardPanel, CardLayout cardLayout, MySoundEffect themeSound) {
         super(cardPanel, cardLayout);
@@ -151,6 +152,12 @@ public class SettingPage extends BasePage {
         radioButton4.setOpaque(false);
         radioButton5.setOpaque(false);
 
+        radioButton1.setForeground(Color.WHITE);
+        radioButton2.setForeground(Color.WHITE);
+        radioButton3.setForeground(Color.WHITE);
+        radioButton4.setForeground(Color.WHITE);
+        radioButton5.setForeground(Color.WHITE);
+
         // Create a ButtonGroup to group the radio buttons
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(radioButton1);
@@ -205,7 +212,7 @@ public class SettingPage extends BasePage {
                 int radius = Math.min(knobBounds.width, knobBounds.height) / 2;
 
                 // Draw a gray circle
-                g2d.setColor(new Color(96, 96, 96));
+                g2d.setColor(Color.WHITE);
                 g2d.fillOval(centerX - radius, centerY - radius, 2 * radius, 2 * radius);
             }
 
@@ -215,7 +222,7 @@ public class SettingPage extends BasePage {
                 Rectangle trackBounds = trackRect;
 
                 // Set the color
-                g2d.setColor(Color.GRAY);
+                g2d.setColor(Color.WHITE);
 
                 // Set the line width
                 float lineWidth = 2.0f; // Set your desired line width here
@@ -236,7 +243,7 @@ public class SettingPage extends BasePage {
         });
         setVisible(true);
 
-        slider.setPreferredSize(new Dimension(600, slider.getPreferredSize().height * 2));
+        slider.setPreferredSize(new Dimension(400, slider.getPreferredSize().height * 2));
 
         JPanel sliderHolder = new JPanel();
         sliderHolder.setOpaque(false);
@@ -276,5 +283,8 @@ public class SettingPage extends BasePage {
 
         Image backgroundImage = new MyImageIcon(backgroundPath).getImage();
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+
+        Image signImage = new MyImageIcon(signBackgroundPath).getImage();
+        g.drawImage(signImage, 0, 0, getWidth(), getHeight(), this);
     }
 }

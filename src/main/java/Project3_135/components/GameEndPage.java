@@ -35,7 +35,6 @@ public class GameEndPage extends BasePage{
         textArea.setFont(customFont);
 
         // Set text
-        score = 1000;
         String endGameMessage = "      Game Over!    Your Score: " + score;
         textArea.setText(endGameMessage);
 
@@ -58,7 +57,7 @@ public class GameEndPage extends BasePage{
         });
 
         JPanel textAreaHolder = new JPanel();
-        textAreaHolder.setOpaque(true);
+        textAreaHolder.setOpaque(false);
         textAreaHolder.add(textArea, BorderLayout.WEST);
         textAreaHolder.setPreferredSize(new Dimension(getWidth(), 200));
 
