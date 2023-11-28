@@ -62,13 +62,13 @@ public class CreditPage extends BasePage {
         nameListHolder.setOpaque(false);
 
         Box verticalBox = Box.createVerticalBox();
-        verticalBox.add(Box.createVerticalGlue()); // Add glue to push components to the top
+        verticalBox.add(Box.createVerticalGlue());
 
         verticalBox.add(name1);
         verticalBox.add(name2);
         verticalBox.add(name3);
 
-        verticalBox.add(Box.createVerticalGlue()); // Add glue to push components to the bottom
+        verticalBox.add(Box.createVerticalGlue());
 
         nameListHolder.add(verticalBox);
 

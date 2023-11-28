@@ -6,7 +6,10 @@ import Project3_135.model.MyMouseListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class GameEndPage extends BasePage{
 
@@ -35,8 +38,23 @@ public class GameEndPage extends BasePage{
         textArea.setFont(customFont);
 
         // Set text
-        String endGameMessage = "      Game Over!    Your Score: " + score;
-        textArea.setText(endGameMessage);
+        String line1 = "Game Over!";
+        String line2 = "Your Score: " + score;
+
+        // Add a component listener to the text area
+        textArea.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Calculate the number of spaces needed to center each line of text
+                String centeredLine1 = centerLine(line1, textArea, customFont);
+                String centeredLine2 = centerLine(line2, textArea, customFont);
+
+                // Set the centered text
+                textArea.setText(centeredLine1 + "\n" + centeredLine2);
+            }
+        });
+
+
 
         // Load the default image icons
         ImageIcon mainMenuIcon = new MyImageIcon(Utilities.MENU_BUTTON_IMAGE_PATH).resize(70);
@@ -73,5 +91,18 @@ public class GameEndPage extends BasePage{
 
         Image backgroundImage = new MyImageIcon(backgroundPath).getImage();
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
+    private String centerLine(String line, JTextArea textArea, Font font) {
+        int textAreaWidth = textArea.getWidth();
+        int textWidth = textArea.getFontMetrics(font).stringWidth(line);
+        int spacesNeeded = (textAreaWidth - textWidth) / textArea.getFontMetrics(font).charWidth(' ');
+
+        // Add the spaces to the beginning of the text string
+        StringBuilder sb = new StringBuilder(line);
+        for (int i = 0; i < spacesNeeded/2; i++) {
+            sb.insert(0, " ");
+        }
+        return sb.toString();
     }
 }
