@@ -74,7 +74,9 @@ public class GamePage extends BasePage {
                         hookLabel.setMove();
                     }
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !gameEnd) {
-                    pauseGame();
+                    if(!tutorialMenu.getVisibility()) {
+                        pauseGame();
+                    }
                 }
             }
 

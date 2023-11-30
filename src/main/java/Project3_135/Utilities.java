@@ -54,7 +54,7 @@ public interface Utilities {
             GOLDORE_LARGE_IMAGE_PATH,
             DIAMOND_IMAGE_PATH};
     double[] SPAWNCHANCE  = {30, 20, 20, 20, 5};
-    int[] SPAWNCONDITION1 = {200, 600, 10, 15};
+    int[] SPAWNCONDITION1 = {250, 600, 10, 15};
     int[] SPAWNCONDITION2 = {250, 650, 20, 10};
     int[] SPAWNCONDITION3 = {300, 600, 40, 30};
     int[] SPAWNCONDITION4 = {300, 620, 100, 12};
