@@ -1,22 +1,25 @@
 package Project3_135;
+//6513135 Purin Pongpanich
+//6513161 Jarupat Chodsitanan
+//6513163 Chalisa Buathong
 
 import Project3_135.components.CreditPage;
+import Project3_135.components.MainPage;
 import Project3_135.components.SettingPage;
 import Project3_135.model.MySoundEffect;
-import Project3_135.components.MainPage;
-import Project3_135.components.Page;
 
 import javax.swing.*;
 import java.awt.*;
 
 
 class MainApplication extends JFrame {
+    private final int framewidth = Utilities.FRAMEWIDTH;
+    private final int frameheight = Utilities.FRAMEHEIGHT;
+
     // components
     private JPanel cardPanel;
     private CardLayout cardLayout;
     private MySoundEffect themeSound;
-    private final int framewidth = Utilities.FRAMEWIDTH;
-    private final int frameheight = Utilities.FRAMEHEIGHT;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainApplication().Main());

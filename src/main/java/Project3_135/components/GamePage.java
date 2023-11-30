@@ -1,5 +1,7 @@
 package Project3_135.components;
-
+//6513135 Purin Pongpanich
+//6513161 Jarupat Chodsitanan
+//6513163 Chalisa Buathong
 import Project3_135.Utilities;
 import Project3_135.model.*;
 
@@ -16,6 +18,7 @@ import java.util.concurrent.CountDownLatch;
 public class GamePage extends BasePage {
 
     private PauseMenu pauseMenu;
+    private TutorialMenu tutorialMenu;
     private HookLabel hookLabel;
     private Image backgroundImage;
     private int totalScore = 0;
@@ -51,7 +54,7 @@ public class GamePage extends BasePage {
             e.printStackTrace();
         }
 
-        createPauseMenu();
+        createTutorialMenu();
 
         // Add key listener
         this.addKeyListener(new KeyListener() {
@@ -62,7 +65,14 @@ public class GamePage extends BasePage {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    hookLabel.setMove();
+                    if(tutorialMenu.getVisibility()){
+                        tutorialMenu.setVisibility(false);
+                        startTimer();
+                        createPauseMenu();
+                        hookLabel.setMove();
+                    }else{
+                        hookLabel.setMove();
+                    }
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !gameEnd) {
                     pauseGame();
                 }
@@ -99,8 +109,13 @@ public class GamePage extends BasePage {
             }
         };
         hookWorker.execute();
+    }
 
-        startTimer();
+    private void createTutorialMenu(){
+        tutorialMenu = new TutorialMenu(0.7f, cardPanel, cardLayout, this);
+        tutorialMenu.setBackground(new Color(31, 31, 31, 255));
+        tutorialMenu.setVisibility(true);
+        add(tutorialMenu, BorderLayout.CENTER);
     }
 
     private void createPauseMenu() {

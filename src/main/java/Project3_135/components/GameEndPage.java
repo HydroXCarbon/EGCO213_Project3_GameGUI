@@ -1,4 +1,7 @@
 package Project3_135.components;
+//6513135 Purin Pongpanich
+//6513161 Jarupat Chodsitanan
+//6513163 Chalisa Buathong
 
 import Project3_135.Utilities;
 import Project3_135.model.MyImageIcon;
@@ -6,15 +9,14 @@ import Project3_135.model.MyMouseListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class GameEndPage extends BasePage{
+public class GameEndPage extends BasePage {
 
-    private int score;
     private final String backgroundPath = Utilities.GAMEEND_BACKGROUND_PATH;
+    private final int score;
 
     public GameEndPage(JPanel cardPanel, CardLayout cardLayout, int score) {
         super(cardPanel, cardLayout);
@@ -22,7 +24,7 @@ public class GameEndPage extends BasePage{
         initializeComponents();
     }
 
-    private void initializeComponents(){
+    private void initializeComponents() {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(200, 0, 50, 0));
 
@@ -53,7 +55,6 @@ public class GameEndPage extends BasePage{
                 textArea.setText(centeredLine1 + "\n" + centeredLine2);
             }
         });
-
 
 
         // Load the default image icons
@@ -100,7 +101,7 @@ public class GameEndPage extends BasePage{
 
         // Add the spaces to the beginning of the text string
         StringBuilder sb = new StringBuilder(line);
-        for (int i = 0; i < spacesNeeded/2; i++) {
+        for (int i = 0; i < spacesNeeded / 2; i++) {
             sb.insert(0, " ");
         }
         return sb.toString();

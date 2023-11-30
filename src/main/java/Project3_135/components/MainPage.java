@@ -1,5 +1,7 @@
 package Project3_135.components;
-
+//6513135 Purin Pongpanich
+//6513161 Jarupat Chodsitanan
+//6513163 Chalisa Buathong
 import Project3_135.Utilities;
 import Project3_135.model.MyImageIcon;
 import Project3_135.model.MyMouseListener;

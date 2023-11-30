@@ -1,5 +1,7 @@
 package Project3_135.model;
-
+//6513135 Purin Pongpanich
+//6513161 Jarupat Chodsitanan
+//6513163 Chalisa Buathong
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;

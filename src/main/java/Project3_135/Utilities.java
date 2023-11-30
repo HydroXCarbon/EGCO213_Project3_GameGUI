@@ -1,5 +1,7 @@
 package Project3_135;
-
+//6513135 Purin Pongpanich
+//6513161 Jarupat Chodsitanan
+//6513163 Chalisa Buathong
 public interface Utilities {
 
     // Resource path
@@ -44,7 +46,7 @@ public interface Utilities {
     int FRAMEWIDTH = 1366;
     int FRAMEHEIGHT = 768;
 
-    // Item setting (Minimum range, Maximum range, Score, Speed penalty
+    // Item setting (Minimum range, Maximum range, Score, Speed penalty)
     String[] IMAGEFILES ={
             ROCK_SMALL_IMAGE_PATH,
             ROCK_LARGE_IMAGE_PATH,
@@ -60,5 +62,5 @@ public interface Utilities {
 
     // Game setting
     int ITEMAMOUNT = 30;
-    int GAMETIME =1;
+    int GAMETIME = 60;
 }
